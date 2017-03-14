@@ -1,0 +1,25 @@
+---
+- name: Install perlbrew installer
+  copy:
+    src: perl_install.sh
+    dest: '{{ lookup("env", "HOME") }}/perl_install.sh'
+    mode: 0755
+    owner: '{{ lookup("env", "USER") }}'
+
+- name: Install prelbrew
+  command: /bin/bash ./perl_install.sh
+  args:
+    chdir: '{{ lookup("env", "HOME") }}/'
+    creates: '{{ lookup("env", "HOME") }}/perl5/perlbrew'
+
+- name: Verify .bash_profile
+  file:
+    path: '{{ lookup("env", "HOME") }}/.bash_profile'
+    state: touch
+
+- name: Add source to bash_profile
+  lineinfile:
+    dest: '{{ lookup("env", "HOME") }}/.bash_profile'
+    line: 'source ~/perl5/perlbrew/etc/bashrc'
+
+

@@ -30,7 +30,5 @@
     owner: "{{ lookup('env','USER') }}"
   with_items:
     - "{{ dotfiles_files.stdout_lines }}"
-
-- name: Configure Vim
-  local_action: command vim -c VundleUpdate -c quitall
-  become: false
+  notify:
+    - Configure Vim

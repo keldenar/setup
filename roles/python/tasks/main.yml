@@ -1,0 +1,15 @@
+---
+- name: Create a python virtual env
+  pip:
+    name: '{{ item }}'
+    virtualenv: "{{ lookup('env','HOME') }}/python.local"
+    state: present
+  with_items:
+    pyyaml
+    jinja2
+    python_openstackclient
+
+- name: Add local python to bash_profile
+  lineinfile:
+    dest: "{{ lookup('env','HOME') }}/.bash_profile"
+    line: "source {{ lookup('env', 'HOME') }}/python.local/bin/activate"

@@ -30,7 +30,7 @@ Bundle 'gmarik/vundle'
 Bundle 'CSApprox'
 Bundle 'Tabular'
 Bundle 'Tagbar'
-Bundle 'VimOutliner'
+"Bundle 'VimOutliner'
 Bundle 'ack.vim'
 Bundle 'junegunn/seoul256.vim'
 Bundle 'kchmck/vim-coffee-script'
@@ -50,6 +50,7 @@ Bundle 'unimpaired.vim'
 Bundle 'vim-scripts/Gundo'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'chase/vim-ansible-yaml'
 
 if vundleAlreadyExists == 0
     BundleInstall
