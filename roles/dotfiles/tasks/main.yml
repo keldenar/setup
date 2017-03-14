@@ -5,10 +5,6 @@
   changed_when: false
   become: false
 
-- name: Debug
-  debug:
-    var: dotfiles_templates
-
 - name: Register available files
   local_action: command ls -A {{ dotfiles_file_store }}/
   register: dotfiles_files
@@ -24,4 +20,15 @@
     owner: "{{ lookup('env','USER') }}"
   with_items:
     - "{{ dotfiles_templates.stdout_lines }}"
+
+- name: Install files
+  become: false
+  template:
+    src: "{{ dotfiles_file_store}}/{{ item }}"
+    dest: "{{ lookup('env','HOME') }}/{{ item }}"
+    mode: 0644
+    owner: "{{ lookup('env','USER') }}"
+  with_items:
+    - "{{ dotfiles_files.stdout_lines }}"
+
 
