@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  user: ubuntu
+  gather_facts: false
+  roles:
+    - {role: dotfiles, tags: dotfiles}
+    - {role: python, tags: python}
+    - {role: perl, tags: perl}
