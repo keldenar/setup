@@ -1,0 +1,27 @@
+---
+- name: Register available templates
+  local_action: command ls -A {{ dotfiles_template_store }}/
+  register: dotfiles_templates
+  changed_when: false
+  become: false
+
+- name: Debug
+  debug:
+    var: dotfiles_templates
+
+- name: Register available files
+  local_action: command ls -A {{ dotfiles_file_store }}/
+  register: dotfiles_files
+  changed_when: false
+  become: false
+
+- name: Install templates
+  become: false
+  template:
+    src: "{{ dotfiles_template_store }}/{{ item }}"
+    dest: "{{ lookup('env','HOME') }}/{{ item }}"
+    mode: 0644
+    owner: "{{ lookup('env','USER') }}"
+  with_items:
+    - "{{ dotfiles_templates.stdout_lines }}"
+

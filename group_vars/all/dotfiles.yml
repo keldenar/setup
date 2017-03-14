@@ -1,0 +1,3 @@
+---
+dotfiles_template_store: roles/dotfiles/templates
+dotfiles_file_store: roles/dotfiles/files
