@@ -1,0 +1,4 @@
+---
+- name: Configure Vim
+  local_action: command vim -c VundleUpdate -c quitall
+  become: false
